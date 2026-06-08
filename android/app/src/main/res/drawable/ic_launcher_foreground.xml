@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Transformation arrows icon -->
+    <path
+        android:fillColor="#00C2A8"
+        android:pathData="M30,54 L48,36 L48,46 L68,46 L68,62 L48,62 L48,72 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M78,54 L60,72 L60,62 L40,62 L40,46 L60,46 L60,36 Z" />
+    <path
+        android:fillColor="#00C2A8"
+        android:pathData="M44,28 L64,28 L54,18 Z"
+        android:fillAlpha="0.6" />
+    <path
+        android:fillColor="#00C2A8"
+        android:pathData="M44,80 L64,80 L54,90 Z"
+        android:fillAlpha="0.6" />
+</vector>

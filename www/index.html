@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0A3D62">
+  <title>ContentFloss</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__brand">
+      <div class="header__logo" aria-hidden="true">CF</div>
+      <div>
+        <h1 class="header__title">ContentFloss</h1>
+        <p class="header__tagline">Turn one idea into multiple high-performing posts</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="card input-section">
+      <h2 class="section-title">Input</h2>
+
+      <label class="label" for="input-text">Paste your content</label>
+      <textarea
+        id="input-text"
+        class="textarea"
+        rows="6"
+        placeholder="Paste your article, blog post, or notes here…"
+      ></textarea>
+
+      <div class="divider">
+        <span>or</span>
+      </div>
+
+      <label class="label" for="input-link">YouTube link</label>
+      <input
+        id="input-link"
+        class="input"
+        type="url"
+        placeholder="https://youtube.com/watch?v=…"
+      >
+
+      <label class="label" for="platform-select">Platform</label>
+      <select id="platform-select" class="select">
+        <option value="all">All</option>
+        <option value="instagram">Instagram</option>
+        <option value="linkedin">LinkedIn</option>
+        <option value="twitter">Twitter</option>
+      </select>
+
+      <p id="usage-info" class="usage-info" aria-live="polite"></p>
+
+      <button id="btn-generate" class="btn btn--primary" type="button">
+        Generate Posts
+      </button>
+
+      <div id="status" class="status" hidden>
+        <div class="spinner" aria-hidden="true"></div>
+        <span id="status-text">Generating…</span>
+      </div>
+
+      <div id="error" class="error" role="alert" hidden></div>
+    </section>
+
+    <section id="output-section" class="output-section" hidden>
+      <h2 class="section-title">Results</h2>
+
+      <div id="card-instagram" class="card output-card" hidden>
+        <div class="output-card__header">
+          <span class="output-card__badge output-card__badge--instagram">Instagram</span>
+          <button class="btn-copy" data-target="out-instagram" type="button">Copy</button>
+        </div>
+        <p id="out-instagram" class="output-card__body"></p>
+      </div>
+
+      <div id="card-linkedin" class="card output-card" hidden>
+        <div class="output-card__header">
+          <span class="output-card__badge output-card__badge--linkedin">LinkedIn</span>
+          <button class="btn-copy" data-target="out-linkedin" type="button">Copy</button>
+        </div>
+        <p id="out-linkedin" class="output-card__body"></p>
+      </div>
+
+      <div id="card-twitter" class="card output-card" hidden>
+        <div class="output-card__header">
+          <span class="output-card__badge output-card__badge--twitter">Twitter</span>
+          <button class="btn-copy" data-target="out-twitter" type="button">Copy</button>
+        </div>
+        <p id="out-twitter" class="output-card__body"></p>
+      </div>
+
+      <div id="card-hooks" class="card output-card" hidden>
+        <div class="output-card__header">
+          <span class="output-card__badge output-card__badge--hooks">Hooks</span>
+        </div>
+        <ul id="out-hooks" class="hooks-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>ContentFloss &mdash; AI content repurposing</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

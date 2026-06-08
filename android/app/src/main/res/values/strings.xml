@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ContentFloss</string>
+    <!-- Set your deployed backend URL for the APK (e.g. https://your-server.com) -->
+    <!-- Leave empty to use emulator default http://10.0.2.2:3000 -->
+    <string name="api_base_url"></string>
+</resources>

@@ -1,0 +1,21 @@
+{
+  "name": "contentfloss",
+  "version": "1.0.0",
+  "description": "AI content repurposing tool — turn one idea into multiple high-performing posts",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "copy-www": "node scripts/copy-www.js",
+    "build:apk": "node scripts/copy-www.js && cd android && gradlew.bat assembleRelease && cd .. && node scripts/copy-apk.js"
+  },
+  "keywords": ["content", "ai", "gemini", "repurposing"],
+  "license": "MIT",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "youtube-transcript": "^1.2.1"
+  }
+}
