@@ -1,0 +1,89 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'www/**'
+      - 'android/**'
+      - '.github/workflows/build-apk.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK packages
+        run: |
+          sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Copy web assets
+        run: node scripts/copy-www.js
+
+      - name: Create release keystore
+        run: |
+          keytool -genkeypair -v \
+            -keystore android/contentfloss-release.keystore \
+            -alias contentfloss \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass contentfloss -keypass contentfloss \
+            -dname "CN=ContentFloss, OU=DigitalFlossie, O=DigitalFlossie, L=London, ST=England, C=GB"
+
+      - name: Build release APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease --no-daemon
+
+      - name: Validate APK
+        run: |
+          APK="android/app/build/outputs/apk/release/ContentFloss-release.apk"
+          test -f "$APK"
+          unzip -l "$APK" | grep -q "assets/www/index.html"
+          unzip -l "$APK" | grep -q "assets/www/app.js"
+          echo "APK validation passed"
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ContentFloss-release
+          path: android/app/build/outputs/apk/release/ContentFloss-release.apk
+
+      - name: Create GitHub Release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: ContentFloss v1.0.${{ github.run_number }}
+          body: |
+            ## ContentFloss v1.0.0
+
+            AI content repurposing tool for Android.
+
+            ### Install
+            1. Download `ContentFloss-release.apk` below
+            2. Install on your Android device
+            3. Run the backend server (`npm start`) or deploy to a host
+            4. Point the app to your API URL in `strings.xml` (for production builds)
+
+            ### Requirements
+            - Android 7.0+ (API 24)
+            - Backend server with Gemini API key configured
+          files: android/app/build/outputs/apk/release/ContentFloss-release.apk
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
