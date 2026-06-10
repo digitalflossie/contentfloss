@@ -2,7 +2,7 @@
 
 **Turn one idea into multiple high-performing posts**
 
-ContentFloss is a lightweight AI content repurposing tool. Paste long-form text or a YouTube link, and generate platform-specific posts for Instagram, LinkedIn, and Twitter — powered by Google Gemini.
+ContentFloss is a lightweight AI content repurposing tool. Paste long-form text or a YouTube link, and generate platform-specific posts for Instagram, LinkedIn, and Twitter — powered by Groq LLaMA3.
 
 ---
 
@@ -15,7 +15,7 @@ contentfloss/
 │   ├── styles.css
 │   └── app.js
 ├── lib/
-│   └── gemini.js         # Gemini API integration
+│   └── groq.js           # Groq API integration
 ├── android/              # Android WebView APK wrapper
 │   └── app/src/main/
 │       ├── assets/www/   # Bundled web app
@@ -30,7 +30,7 @@ contentfloss/
 ## Prerequisites
 
 - **Node.js** 18+ and npm
-- **Gemini API key** from [Google AI Studio](https://aistudio.google.com/apikey)
+- **Groq API key** from [Groq Cloud Console](https://console.groq.com/keys)
 - **JDK 17+** and **Android SDK** (for APK builds only)
 
 ---
@@ -43,7 +43,7 @@ contentfloss/
 npm install
 ```
 
-### 2. Set your Gemini API key
+### 2. Set your Groq API key
 
 Copy the example env file and add your key:
 
@@ -54,7 +54,7 @@ cp .env.example .env
 Edit `.env`:
 
 ```
-GEMINI_API_KEY=your_gemini_api_key_here
+GROQ_API_KEY=your_groq_api_key_here
 PORT=3000
 ```
 
@@ -66,16 +66,16 @@ npm start
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Add your Gemini API key
+### Add your Groq API key
 
 Create a `.env` file in the project root:
 
 ```
-GEMINI_API_KEY=your_key
+GROQ_API_KEY=your_key
 PORT=3000
 ```
 
-Get a key from [Google AI Studio](https://aistudio.google.com/apikey). The key is read server-side via `process.env.GEMINI_API_KEY` and is never exposed to the browser.
+Get a key from [Groq Cloud Console](https://console.groq.com/keys). The key is read server-side via `process.env.GROQ_API_KEY` and is never exposed to the browser.
 
 ---
 
@@ -95,7 +95,7 @@ Storage keys: `contentfloss_usage_count`, `contentfloss_last_used_date`
 
 1. **Input** — Paste long-form text or a YouTube URL.
 2. **Detect** — YouTube links are resolved to transcripts automatically.
-3. **Generate** — Content is sent to Gemini and transformed into platform-specific posts.
+3. **Generate** — Content is sent to Groq and transformed into platform-specific posts.
 4. **Output** — Results appear in card layout with one-click copy.
 
 ### API Endpoints
@@ -182,7 +182,7 @@ Then rebuild the APK.
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `GEMINI_API_KEY` | Yes | Google Gemini API key |
+| `GROQ_API_KEY` | Yes | Groq API key |
 | `PORT` | No | Server port (default: 3000) |
 
 ---

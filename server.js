@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const { YoutubeTranscript } = require('youtube-transcript');
-const { generateContent } = require('./lib/gemini');
+const { generateContent } = require('./lib/groq');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -56,9 +56,9 @@ async function handleGenerate(req, res) {
       return res.status(400).json({ error: 'No content provided. Paste text or a YouTube link first.' });
     }
 
-    if (!process.env.GEMINI_API_KEY) {
+    if (!process.env.GROQ_API_KEY) {
       return res.status(500).json({
-        error: 'Gemini API key not configured. Set GEMINI_API_KEY in your .env file.'
+        error: 'Groq API key not configured. Set GROQ_API_KEY in your .env file.'
       });
     }
 

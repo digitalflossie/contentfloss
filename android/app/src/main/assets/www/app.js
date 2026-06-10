@@ -22,10 +22,16 @@
     cardInstagram: $('card-instagram'),
     cardLinkedin: $('card-linkedin'),
     cardTwitter: $('card-twitter'),
+    cardYoutube: $('card-youtube'),
+    cardTiktok: $('card-tiktok'),
+    cardFacebook: $('card-facebook'),
     cardHooks: $('card-hooks'),
     outInstagram: $('out-instagram'),
     outLinkedin: $('out-linkedin'),
     outTwitter: $('out-twitter'),
+    outYoutube: $('out-youtube'),
+    outTiktok: $('out-tiktok'),
+    outFacebook: $('out-facebook'),
     outHooks: $('out-hooks')
   };
 
@@ -70,7 +76,10 @@
 
   function getApiBase() {
     if (window.CONTENTFLOSS_API_BASE) return window.CONTENTFLOSS_API_BASE;
-    if (location.protocol === 'file:') return 'http://10.0.2.2:3000';
+    if (location.protocol === 'file:') {
+      // Use 10.0.2.2 for Android emulator, localhost for standard PC browsers
+      return /Android/i.test(navigator.userAgent) ? 'http://10.0.2.2:3000' : 'http://localhost:3000';
+    }
     return '';
   }
 
@@ -96,8 +105,16 @@
 
   function hideAllOutputs() {
     els.outputSection.hidden = true;
-    [els.cardInstagram, els.cardLinkedin, els.cardTwitter, els.cardHooks].forEach((c) => {
-      c.hidden = true;
+    [
+      els.cardInstagram,
+      els.cardLinkedin,
+      els.cardTwitter,
+      els.cardYoutube,
+      els.cardTiktok,
+      els.cardFacebook,
+      els.cardHooks
+    ].forEach((c) => {
+      if (c) c.hidden = true;
     });
   }
 
@@ -118,6 +135,21 @@
     if ((showAll || platform === 'twitter') && data.twitter) {
       els.outTwitter.textContent = data.twitter;
       els.cardTwitter.hidden = false;
+    }
+
+    if ((showAll || platform === 'youtube') && data.youtube) {
+      els.outYoutube.textContent = data.youtube;
+      els.cardYoutube.hidden = false;
+    }
+
+    if ((showAll || platform === 'tiktok') && data.tiktok) {
+      els.outTiktok.textContent = data.tiktok;
+      els.cardTiktok.hidden = false;
+    }
+
+    if ((showAll || platform === 'facebook') && data.facebook) {
+      els.outFacebook.textContent = data.facebook;
+      els.cardFacebook.hidden = false;
     }
 
     if (data.hooks && data.hooks.length > 0) {

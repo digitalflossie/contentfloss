@@ -198,6 +198,10 @@ body {
 }
 
 /* Status */
+.status[hidden] {
+  display: none;
+}
+
 .status {
   display: flex;
   align-items: center;
@@ -268,6 +272,21 @@ body {
 .output-card__badge--twitter {
   background: #e8f5e9;
   color: #2e7d32;
+}
+
+.output-card__badge--youtube {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.output-card__badge--tiktok {
+  background: #eeeeee;
+  color: #212121;
+}
+
+.output-card__badge--facebook {
+  background: #e3f2fd;
+  color: #1565c0;
 }
 
 .output-card__badge--hooks {
