@@ -3,5 +3,5 @@
     <string name="app_name">ContentFloss</string>
     <!-- Set your deployed backend URL for the APK (e.g. https://your-server.com) -->
     <!-- Leave empty to use emulator default http://10.0.2.2:3000 -->
-    <string name="api_base_url">http://10.124.180.147:3000</string>
+    <string name="api_base_url">https://contentfloss.vercel.app</string>
 </resources>

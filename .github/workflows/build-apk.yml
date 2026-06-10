@@ -56,6 +56,7 @@ jobs:
           test -f "$APK"
           unzip -l "$APK" | grep -q "assets/www/index.html"
           unzip -l "$APK" | grep -q "assets/www/app.js"
+          unzip -p "$APK" assets/www/app.js | grep -q "https://contentfloss.vercel.app"
           echo "APK validation passed"
 
       - name: Upload APK artifact
@@ -71,19 +72,19 @@ jobs:
           tag_name: v1.0.${{ github.run_number }}
           name: ContentFloss v1.0.${{ github.run_number }}
           body: |
-            ## ContentFloss v1.0.0
+            ## ContentFloss Android APK
 
-            AI content repurposing tool for Android.
+            Internet-backed ContentFloss build for Android. This APK calls the deployed backend at `https://contentfloss.vercel.app`, so it can generate posts without a local server.
 
             ### Install
             1. Download `ContentFloss-release.apk` below
             2. Install on your Android device
-            3. Run the backend server (`npm start`) or deploy to a host
-            4. Point the app to your API URL in `strings.xml` (for production builds)
+            3. Open ContentFloss and generate posts
 
             ### Requirements
             - Android 7.0+ (API 24)
-            - Backend server with Groq API key configured
+            - Internet connection
+            - Deployed backend with `GROQ_API_KEY` configured
           files: android/app/build/outputs/apk/release/ContentFloss-release.apk
           draft: false
           prerelease: false

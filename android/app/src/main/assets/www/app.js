@@ -76,11 +76,7 @@
 
   function getApiBase() {
     if (window.CONTENTFLOSS_API_BASE) return window.CONTENTFLOSS_API_BASE;
-    if (location.protocol === 'file:') {
-      // Use 10.0.2.2 for Android emulator, localhost for standard PC browsers
-      return /Android/i.test(navigator.userAgent) ? 'http://10.0.2.2:3000' : 'http://localhost:3000';
-    }
-    return '';
+    return 'https://contentfloss.vercel.app';
   }
 
   function isYouTubeUrl(str) {
