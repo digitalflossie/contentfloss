@@ -83,7 +83,7 @@ jobs:
 
             ### Requirements
             - Android 7.0+ (API 24)
-            - Backend server with Gemini API key configured
+            - Backend server with Groq API key configured
           files: android/app/build/outputs/apk/release/ContentFloss-release.apk
           draft: false
           prerelease: false
